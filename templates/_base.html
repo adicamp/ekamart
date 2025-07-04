@@ -1,0 +1,30 @@
+{% load compress %} {% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ekamart - {% block title %}Page{% endblock title %}</title>
+
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'src/output.css' %}" />
+    {% endcompress %}
+  </head>
+
+  <body class="bg-gray-100 dark:bg-gray-900">
+    {% include 'components/navbar.html' %} 
+    {% include 'components/sidebar.html' %}
+
+    <div class="sm:ml-64">
+      <div class="mt-14">
+        {% block content %} {% endblock content %}
+      </div>
+    </div>
+
+    {% compress js %}
+    <script src="{% static 'js/flowbite.min.js' %}"></script>
+    {% endcompress %}
+  </body>
+</html>
