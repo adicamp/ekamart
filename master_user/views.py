@@ -5,16 +5,62 @@ from django.shortcuts import render
 
 def index(request):
     users = [
-        {'name': 'ARIEF FADHILAH', 'user_id': 'arief', 'status': True},
-        {'name': 'ANDI WIJAYA', 'user_id': 'andi', 'status': False},
-        {'name': 'RIZKY PRATAMA', 'user_id': 'rizky', 'status': True},
-        {'name': 'BUDI SANTOSO', 'user_id': 'budi', 'status': False},
-        {'name': 'SITI AMINAH', 'user_id': 'siti', 'status': True},
-        {'name': 'DEWI LESTARI', 'user_id': 'dewi', 'status': False},
-        {'name': 'AGUS SUPRIYADI', 'user_id': 'agus', 'status': True},
-        {'name': 'RINA OKTAVIANI', 'user_id': 'rina', 'status': False},
-        {'name': 'YUSUF HIDAYAT', 'user_id': 'yusuf', 'status': True},
-        {'name': 'LINA MARDIANA', 'user_id': 'lina', 'status': False},
+        {
+            'name': 'Budi Santoso',
+            'user_id': 'BS001',
+            'status': True,
+            'division': 'IT',
+            'permissions': ['view', 'add', 'edit']
+        },
+        {
+            'name': 'Siti Aminah',
+            'user_id': 'SA002',
+            'status': True,
+            'division': 'HRD',
+            'permissions': ['view', 'add']
+        },
+        {
+            'name': 'Agus Wijaya',
+            'user_id': 'AW003',
+            'status': False,
+            'division': 'Keuangan',
+            'permissions': ['view']
+        },
+        {
+            'name': 'Dewi Lestari',
+            'user_id': 'DL004',
+            'status': True,
+            'division': 'Marketing',
+            'permissions': ['view', 'edit']
+        },
+        {
+            'name': 'Cahya Ramadhan',
+            'user_id': 'CR005',
+            'status': False,
+            'division': 'IT',
+            'permissions': ['view', 'delete']
+        },
+        {
+            'name': 'Eka Putri',
+            'user_id': 'EP006',
+            'status': True,
+            'division': 'HRD',
+            'permissions': ['view', 'add', 'edit', 'delete']
+        },
+        {
+            'name': 'Fajar Nugraha',
+            'user_id': 'FN007',
+            'status': True,
+            'division': 'Keuangan',
+            'permissions': ['view']
+        },
+        {
+            'name': 'Gita Permata',
+            'user_id': 'GP008',
+            'status': False,
+            'division': 'Marketing',
+            'permissions': ['view', 'add']
+        },
     ]
     context = {
         'users': users

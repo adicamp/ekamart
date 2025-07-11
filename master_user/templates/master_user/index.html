@@ -3,7 +3,6 @@
 {% block content %}
   <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 w-full h-full">
     <div class="mx-auto max-w-screen-xl px-4 lg:px-12 h-full">
-      <!-- Start coding here -->
       <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg" style="overflow:visible;">
         <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
           <div class="w-full md:w-1/2">
@@ -42,7 +41,7 @@
             </thead>
             <tbody>
               {% for user in users %}
-                <tr class="border-b dark:border-gray-700">
+                <tr class="border-b dark:border-gray-700" id="user-row-{{ user.user_id }}"> {# Added ID for easy removal #}
                   <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ user.name }}</th>
                   <td class="px-4 py-3">{{ user.user_id }}</td>
                   <td class="px-4 py-3">
@@ -61,14 +60,29 @@
                     <div id="user-{{ user.user_id }}-dropdown" class="hidden z-50 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                       <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="user-{{ user.user_id }}-dropdown-button">
                         <li>
-                          <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>
-                        </li>
-                        <li>
-                          <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                          <a href="#" 
+                             class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white edit-user-btn"
+                             data-modal-target="editUserModal" 
+                             data-modal-toggle="editUserModal"
+                             data-user-id="{{ user.user_id }}"
+                             data-user-name="{{ user.name }}"
+                             data-user-division="{{ user.division }}"
+                             data-user-status="{% if user.status %}1{% else %}0{% endif %}"
+                             data-user-permissions="{{ user.permissions | join:',' }}"> 
+                             Edit
+                          </a>
                         </li>
                       </ul>
                       <div class="py-1">
-                        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                        {# Modified delete button to trigger the deleteModal #}
+                        <a href="#" 
+                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white delete-user-trigger" 
+                           data-modal-target="deleteModal" 
+                           data-modal-toggle="deleteModal" 
+                           data-user-id="{{ user.user_id }}"
+                           data-user-name="{{ user.name }}">
+                           Delete
+                        </a>
                       </div>
                     </div>
                   </td>
@@ -120,84 +134,125 @@
         </nav>
       </div>
     </div>
-
-    <!-- Main modal -->
-    <div id="addUserModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-      <div class="relative p-4 w-full max-w-md max-h-full">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-          <!-- Modal header -->
-          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-              Tambah User Baru
-            </h3>
-            <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="addUserModal">
-              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-              </svg>
-              <span class="sr-only">Close modal</span>
-            </button>
-          </div>
-          <!-- Modal body -->
-          <div class="p-4 md:p-5">
-            <form class="space-y-4" action="#" method="post">
-              {% csrf_token %}
-              <div>
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Karyawan</label>
-                <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Nama Karyawan" required />
-              </div>
-              <div>
-                <label for="user_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">User ID</label>
-                <input type="text" name="user_id" id="user_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="User ID" required />
-              </div>
-              <div>
-                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
-              </div>
-              <div>
-                <label for="division" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Divisi</label>
-                <select name="division" id="division" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
-                  <option value="">Pilih Divisi</option>
-                  <option value="hrd">HRD</option>
-                  <option value="keuangan">Keuangan</option>
-                  <option value="it">IT</option>
-                  <option value="marketing">Marketing</option>
-                  <!-- Tambahkan divisi lain sesuai kebutuhan -->
-                </select>
-              </div>
-              <div>
-                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hak Akses</label>
-                <div class="flex flex-col gap-2">
-                  <label class="inline-flex items-center">
-                    <input type="checkbox" name="permissions" value="view" class="form-checkbox text-primary-600 rounded" />
-                    <span class="ml-2 text-gray-700 dark:text-gray-200">Lihat Data</span>
-                  </label>
-                  <label class="inline-flex items-center">
-                    <input type="checkbox" name="permissions" value="add" class="form-checkbox text-primary-600 rounded" />
-                    <span class="ml-2 text-gray-700 dark:text-gray-200">Tambah Data</span>
-                  </label>
-                  <label class="inline-flex items-center">
-                    <input type="checkbox" name="permissions" value="edit" class="form-checkbox text-primary-600 rounded" />
-                    <span class="ml-2 text-gray-700 dark:text-gray-200">Edit Data</span>
-                  </label>
-                  <label class="inline-flex items-center">
-                    <input type="checkbox" name="permissions" value="delete" class="form-checkbox text-primary-600 rounded" />
-                    <span class="ml-2 text-gray-700 dark:text-gray-200">Hapus Data</span>
-                  </label>
-                </div>
-              </div>
-              <div>
-                <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
-                <select name="status" id="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
-                  <option value="1">Aktif</option>
-                  <option value="0">Belum Aktif</option>
-                </select>
-              </div>
-              <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Tambah User</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
   </section>
+  {% include 'master_user/components/_add_user_modal.html' %}
+  {% include 'master_user/components/_edit_user_modal.html' %}
+  {% include 'master_user/components/_delete_user_modal.html' %}
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Edit User Modal Logic
+      const editButtons = document.querySelectorAll('.edit-user-btn');
+      const editUserForm = document.getElementById('editUserForm');
+      const editUserIdHidden = document.getElementById('edit_user_id_hidden');
+      const editName = document.getElementById('edit_name');
+      const editUserIdDisplay = document.getElementById('edit_user_id_display');
+      const editDivision = document.getElementById('edit_division');
+      const editStatus = document.getElementById('edit_status');
+      const editPermView = document.getElementById('edit_perm_view');
+      const editPermAdd = document.getElementById('edit_perm_add');
+      const editPermEdit = document.getElementById('edit_perm_edit');
+      const editPermDelete = document.getElementById('edit_perm_delete');
+
+      editButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+          event.preventDefault(); 
+
+          const userId = this.dataset.userId;
+          const userName = this.dataset.userName;
+          const userDivision = this.dataset.userDivision;
+          const userStatus = this.dataset.userStatus;
+          const userPermissions = this.dataset.userPermissions ? this.dataset.userPermissions.split(',') : [];
+
+          editUserIdHidden.value = userId;
+          editName.value = userName;
+          editUserIdDisplay.value = userId; 
+          editDivision.value = userDivision;
+          editStatus.value = userStatus;
+
+          editPermView.checked = userPermissions.includes('view');
+          editPermAdd.checked = userPermissions.includes('add');
+          editPermEdit.checked = userPermissions.includes('edit');
+          editPermDelete.checked = userPermissions.includes('delete');
+        });
+      });
+
+      editUserForm.addEventListener('submit', function(event) {
+          const userId = editUserIdHidden.value;
+          this.action = `/users/edit/${userId}/`; 
+      });
+
+      // Delete User Modal Logic
+      const deleteTriggers = document.querySelectorAll('.delete-user-trigger');
+      const deleteConfirmationText = document.querySelector('#deleteModal p.mb-4');
+      const confirmDeleteButton = document.querySelector('#deleteModal button.bg-red-600');
+      
+      let userIdToDelete = null;
+
+      deleteTriggers.forEach(button => {
+        button.addEventListener('click', function(event) {
+          event.preventDefault(); 
+
+          userIdToDelete = this.dataset.userId;
+          const userName = this.dataset.userName;
+
+          if (deleteConfirmationText) {
+            deleteConfirmationText.textContent = `Apakah Anda yakin ingin menghapus user "${userName}" (ID: ${userIdToDelete})?`;
+          }
+        });
+      });
+
+      confirmDeleteButton.addEventListener('click', function() {
+        if (userIdToDelete) {
+          fetch(`/users/delete/${userIdToDelete}/`, {
+              method: 'POST',
+              headers: {
+                  'X-CSRFToken': getCookie('csrftoken'), 
+                  'Content-Type': 'application/json'
+              },
+          })
+          .then(response => {
+              const deleteModalElement = document.getElementById('deleteModal');
+              if (deleteModalElement) {
+                deleteModalElement.classList.add('hidden'); 
+              }
+
+              if (response.ok) {
+                  return response.json(); 
+              }
+              return response.json().then(errorData => {
+                throw new Error(errorData.message || 'Something went wrong on the server.');
+              });
+          })
+          .then(data => {
+              alert(data.message || 'User berhasil dihapus!');
+              const rowToRemove = document.getElementById(`user-row-${userIdToDelete}`);
+              if (rowToRemove) {
+                  rowToRemove.remove();
+              }
+              userIdToDelete = null;
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              alert('Terjadi kesalahan saat menghapus user: ' + error.message);
+          });
+        }
+      });
+
+      function getCookie(name) {
+          let cookieValue = null;
+          if (document.cookie && document.cookie !== '') {
+              const cookies = document.cookie.split(';');
+              for (let i = 0; i < cookies.length; i++) {
+                  const cookie = cookies[i].trim();
+                  if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                      cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                      break;
+                  }
+              }
+          }
+          return cookieValue;
+      }
+    });
+  </script>
 {% endblock content %}
