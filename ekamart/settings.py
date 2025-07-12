@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'compressor',
     'master_user',
+    'master_rak',
 ]
 
 MIDDLEWARE = [

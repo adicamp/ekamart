@@ -10,10 +10,12 @@
       <li>
         <a
           href="#"
-          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+          class="flex items-center p-2 rounded-lg group
+            {% if request.resolver_match.url_name == 'dashboard' %}bg-gray-100 dark:bg-gray-700 text-blue-600 dark:text-white{% else %}text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700{% endif %}"
         >
           <svg
-            class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+            class="w-5 h-5 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white
+              {% if request.resolver_match.url_name == 'dashboard' %}text-blue-600 dark:text-white{% else %}text-gray-500 dark:text-gray-400{% endif %}"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
@@ -32,10 +34,12 @@
       <li>
         <a
           href="{% url 'master_user.index' %}"
-          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+          class="flex items-center p-2 rounded-lg group
+            {% if request.resolver_match.url_name == 'master_user.index' %}bg-gray-100 dark:bg-gray-700 text-blue-600 dark:text-white{% else %}text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700{% endif %}"
         >
           <svg
-            class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+            class="shrink-0 w-5 h-5 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white
+              {% if request.resolver_match.url_name == 'master_user.index' %}text-blue-600 dark:text-white{% else %}text-gray-500 dark:text-gray-400{% endif %}"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
@@ -46,6 +50,25 @@
             />
           </svg>
           <span class="flex-1 ms-3 whitespace-nowrap">Users</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href="{% url 'master_rak.index' %}"
+          class="flex items-center p-2 rounded-lg group
+            {% if request.resolver_match.url_name == 'master_rak.index' %}bg-gray-100 dark:bg-gray-700 text-blue-600 dark:text-white{% else %}text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700{% endif %}"
+        >
+          <svg
+            class="shrink-0 w-5 h-5 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white
+              {% if request.resolver_match.url_name == 'master_rak.index' %}text-blue-600 dark:text-white{% else %}text-gray-500 dark:text-gray-400{% endif %}"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M3 23V1h2v2h14V1h2v22h-2v-2H5v2H3Zm2-12h2V7h6v4h6V5H5v6Zm0 8h6v-4h6v4h2v-6H5v6Z"/>
+          </svg>
+          <span class="flex-1 ms-3 whitespace-nowrap">Rak</span>
         </a>
       </li>
     </ul>
