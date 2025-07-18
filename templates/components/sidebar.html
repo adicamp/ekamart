@@ -58,9 +58,32 @@
           class="flex items-center p-2 rounded-lg group
             {% if request.resolver_match.url_name == 'master_rak.index' %}bg-gray-100 dark:bg-gray-700 text-blue-600 dark:text-white{% else %}text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700{% endif %}"
         >
-          <svg
+            <svg
             class="shrink-0 w-5 h-5 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white
               {% if request.resolver_match.url_name == 'master_rak.index' %}text-blue-600 dark:text-white{% else %}text-gray-500 dark:text-gray-400{% endif %}"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            >
+            <rect x="2" y="5" width="16" height="10" rx="2"/>
+            <rect x="5" y="8" width="2" height="4" rx="1" fill="white"/>
+            <rect x="13" y="8" width="2" height="4" rx="1" fill="white"/>
+            </svg>
+          <span class="flex-1 ms-3 whitespace-nowrap">Rak</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href="{% url 'master_shelving.index' %}"
+          class="flex items-center p-2 rounded-lg group
+            {% if request.resolver_match.url_name == 'master_shelving.index' %}bg-gray-100 dark:bg-gray-700 text-blue-600 dark:text-white{% else %}text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700{% endif %}"
+        >
+          <svg
+            class="shrink-0 w-5 h-5 transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white
+              {% if request.resolver_match.url_name == 'master_shelving.index' %}text-blue-600 dark:text-white{% else %}text-gray-500 dark:text-gray-400{% endif %}"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
@@ -68,7 +91,7 @@
           >
             <path d="M3 23V1h2v2h14V1h2v22h-2v-2H5v2H3Zm2-12h2V7h6v4h6V5H5v6Zm0 8h6v-4h6v4h2v-6H5v6Z"/>
           </svg>
-          <span class="flex-1 ms-3 whitespace-nowrap">Rak</span>
+          <span class="flex-1 ms-3 whitespace-nowrap">Shelving</span>
         </a>
       </li>
     </ul>

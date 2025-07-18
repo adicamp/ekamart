@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'compressor',
     'master_user',
     'master_rak',
+    'master_shelving',
 ]
 
 MIDDLEWARE = [

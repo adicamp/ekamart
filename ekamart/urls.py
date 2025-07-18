@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('master-user/', include('master_user.urls')),
     path('master-rak/', include('master_rak.urls')),
+    path('master-shelving/', include('master_shelving.urls')),
 ]
