@@ -17,10 +17,8 @@
     {% include 'components/navbar.html' %} 
     {% include 'components/sidebar.html' %}
 
-    <div class="sm:ml-64">
-      <div class="mt-14">
-        {% block content %} {% endblock content %}
-      </div>
+    <div>
+      {% block content %} {% endblock content %}
     </div>
 
     {% compress js %}

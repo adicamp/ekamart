@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'master_user',
     'master_rak',
     'master_shelving',
+    'jwk_toko',
 ]
 
 MIDDLEWARE = [
