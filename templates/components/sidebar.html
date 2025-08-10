@@ -119,6 +119,26 @@
             <ul id="dropdown-products" class="hidden py-2 space-y-2">
               <li>
                 <a
+                  href="{% url 'supplier_reguler.index' %}"
+                  class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-16 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
+                    {% if request.resolver_match.url_name == 'supplier_reguler.index' %}bg-gray-100 dark:bg-gray-700 text-blue-600 dark:text-white{% endif %}"
+                >
+                  <span class="mr-2 text-lg">&#8226;</span>
+                  Supplier Reguler
+                </a>
+              </li>
+              <li>
+                <a
+                  href="{% url 'supplier_bkl.index' %}"
+                  class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-16 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
+                    {% if request.resolver_match.url_name == 'supplier_bkl.index' %}bg-gray-100 dark:bg-gray-700 text-blue-600 dark:text-white{% endif %}"
+                >
+                  <span class="mr-2 text-lg">&#8226;</span>
+                  Supplier BKL
+                </a>
+              </li>
+              <li>
+                <a
                   href="{% url 'jwk_toko.index' %}"
                   class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-16 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
                     {% if request.resolver_match.url_name == 'jwk_toko.index' %}bg-gray-100 dark:bg-gray-700 text-blue-600 dark:text-white{% endif %}"

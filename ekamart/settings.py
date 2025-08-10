@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'master_rak',
     'master_shelving',
     'jwk_toko',
+    'supplier_reguler',
+    'supplier_bkl',
 ]
 
 MIDDLEWARE = [

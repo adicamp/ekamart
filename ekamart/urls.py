@@ -23,4 +23,6 @@ urlpatterns = [
     path('master-rak/', include('master_rak.urls')),
     path('master-shelving/', include('master_shelving.urls')),
     path('jwk-toko/', include('jwk_toko.urls')),
+    path('supplier-reguler/', include('supplier_reguler.urls')),
+    path('supplier-bkl/', include('supplier_bkl.urls')),
 ]
