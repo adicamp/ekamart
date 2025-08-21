@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'compressor',
+    'dashboard',
     'master_user',
     'master_rak',
     'master_shelving',
