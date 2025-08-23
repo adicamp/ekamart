@@ -1,12 +1,24 @@
 {% extends "_base.html" %}
 {% block title %}Master Rak{% endblock title %}
 {% block content %}
+  <!-- ====== SECTION WRAPPER ====== -->
   <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 w-full h-full">
     <div class="mx-auto max-w-screen-xl px-4 lg:px-12 h-full">
       <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg" style="overflow:visible;">
-        <div class="px-4 pt-4">
-          <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Master Rak</h2>
+        <!-- ====== TABLE TITLE ====== -->
+        <div class="px-4 pt-4 pb-3 border-b border-gray-100 dark:border-gray-700">
+          <div class="flex items-center gap-3">
+            <span class="h-8 w-1.5 rounded-full bg-blue-600"></span>
+            <div>
+              <p class="text-[11px] font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400">Planogram</p>
+              <h2 class="mt-0.5 text-xl sm:text-2xl font-bold leading-tight text-gray-900 dark:text-white">
+                MASTER RAK
+              </h2>
+            </div>
+          </div>
         </div>
+        <!-- ====== END TABLE TITLE ====== -->
+        <!-- ====== TABLE ACTIONS ====== -->
         <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
           <div class="w-full md:w-1/2">
             <form class="flex items-center">
@@ -30,6 +42,7 @@
             </button>
           </div>
         </div>
+        <!-- ====== RAK TABLE ====== -->
         <div class="overflow-x-auto">
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -44,111 +57,76 @@
             </thead>
             <tbody>
               {% for rack in racks %}
-                <tr class="border-b dark:border-gray-700" id="rack-row-{{ rack.id }}">
-                  <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ rack.rack }}</th>
-                  <td class="px-4 py-3">{{ rack.last_updated }}</td>
-                  <td class="px-4 py-3">{{ rack.user }}</td>
-                  <td class="px-4 py-3 flex items-center justify-end">
-                    <button id="rack-{{ rack.id }}-dropdown-button" data-dropdown-toggle="rack-{{ rack.id }}-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
-                      <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                      </svg>
-                    </button>
-                    <div id="rack-{{ rack.id }}-dropdown" class="hidden z-50 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                      <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="rack-{{ rack.id }}-dropdown-button">
-                        <li>
-                          <a href="#"
-                             class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white edit-rack-btn"
-                             data-modal-target="editRackModal"
-                             data-modal-toggle="editRackModal"
-                             data-rack-id="{{ rack.id }}"
-                             data-rack-name="{{ rack.rack }}"
-                             data-rack-last-updated="{{ rack.last_updated|date:'Y-m-d' }}"
-                             data-rack-user-id="{{ rack.user_id }}">
-                             Edit
-                          </a>
-                        </li>
-                      </ul>
-                      <div class="py-1">
+              <tr class="border-b dark:border-gray-700" id="rack-row-{{ rack.id }}">
+                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ rack.rack }}</th>
+                <td class="px-4 py-3">{{ rack.last_updated }}</td>
+                <td class="px-4 py-3">{{ rack.user }}</td>
+                <td class="px-4 py-3 flex items-center justify-end">
+                  <button id="rack-{{ rack.id }}-dropdown-button" data-dropdown-toggle="rack-{{ rack.id }}-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
+                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                    </svg>
+                  </button>
+                  <div id="rack-{{ rack.id }}-dropdown" class="hidden z-50 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="rack-{{ rack.id }}-dropdown-button">
+                      <li>
                         <a href="#"
-                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white delete-rack-trigger"
-                           data-modal-target="deleteModal"
-                           data-modal-toggle="deleteModal"
-                           data-rack-id="{{ rack.id }}"
-                           data-rack-name="{{ rack.rack }}">
-                           Delete
+                          class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white edit-rack-btn"
+                          data-modal-target="editRackModal"
+                          data-modal-toggle="editRackModal"
+                          data-rack-id="{{ rack.id }}"
+                          data-rack-name="{{ rack.rack }}"
+                          data-rack-last-updated="{{ rack.last_updated|date:'Y-m-d' }}"
+                          data-rack-user-id="{{ rack.user_id }}">
+                          Edit
                         </a>
-                      </div>
+                      </li>
+                    </ul>
+                    <div class="py-1">
+                      <a href="#"
+                        class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white delete-rack-trigger"
+                        data-modal-target="deleteModal"
+                        data-modal-toggle="deleteModal"
+                        data-rack-id="{{ rack.id }}"
+                        data-rack-name="{{ rack.rack }}">
+                        Delete
+                      </a>
                     </div>
-                  </td>
-                </tr>
+                  </div>
+                </td>
+              </tr>
               {% endfor %}
             </tbody>
           </table>
         </div>
-        <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
-          <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-            Showing
-            <span class="font-semibold text-gray-900 dark:text-white">1-10</span>
-            of
-            <span class="font-semibold text-gray-900 dark:text-white">1000</span>
-          </span>
-          <ul class="inline-flex items-stretch -space-x-px">
-            <li>
-              <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                <span class="sr-only">Previous</span>
-                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-            </li>
-            <li>
-              <a href="#" aria-current="page" class="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight text-primary-600 bg-primary-50 border border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                <span class="sr-only">Next</span>
-                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                </svg>
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <!-- ====== END RAK TABLE ====== -->
+        <!-- ====== TABLE PAGINATION ====== -->
+        {% include 'components/table_pagination.html' %}
+        <!-- ====== END TABLE PAGINATION ====== -->
       </div>
     </div>
   </section>
+  <!-- ====== MODALS ====== -->
   {% include 'master_rak/components/_add_rack_modal.html' %}
   {% include 'master_rak/components/_edit_rack_modal.html' %}
   {% include 'master_rak/components/_delete_rack_modal.html' %}
-  
+  <!-- ====== END MODALS ====== -->
+  <!-- ====== SCRIPT ====== -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       function getCookie(name) {
-          let cookieValue = null;
-          if (document.cookie && document.cookie !== '') {
-              const cookies = document.cookie.split(';');
-              for (let i = 0; i < cookies.length; i++) {
-                  const cookie = cookies[i].trim();
-                  if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                      cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                      break;
-                  }
-              }
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
           }
-          return cookieValue;
+        }
+        return cookieValue;
       }
 
       // Edit Rack Modal Logic 
@@ -190,47 +168,50 @@
           const rackName = this.dataset.rackName;
 
           if (deleteConfirmationText) {
-            deleteConfirmationText.textContent = `Apakah Anda yakin ingin menghapus rak "${rackName}" (ID: ${rackIdToDelete})?`;
+            deleteConfirmationText.textContent = `Apakah Anda yakin ingin menghapus rak \"${rackName}\" (ID: ${rackIdToDelete})?`;
           }
         });
       });
 
-      confirmDeleteButton.addEventListener('click', function() {
-        if (rackIdToDelete) {
-          fetch(`/master_rak/delete/${rackIdToDelete}/`, {
+      if (confirmDeleteButton) {
+        confirmDeleteButton.addEventListener('click', function() {
+          if (rackIdToDelete) {
+            fetch(`/master_rak/delete/${rackIdToDelete}/`, {
               method: 'POST',
               headers: {
-                  'X-CSRFToken': getCookie('csrftoken'), 
-                  'Content-Type': 'application/json' 
+                'X-CSRFToken': getCookie('csrftoken'), 
+                'Content-Type': 'application/json' 
               },
-          })
-          .then(response => {
+            })
+            .then(response => {
               const deleteModalElement = document.getElementById('deleteModal');
               if (deleteModalElement) {
                 deleteModalElement.classList.add('hidden'); 
               }
 
               if (response.ok) {
-                  return response.json(); 
+                return response.json(); 
               }
               return response.json().then(errorData => {
                 throw new Error(errorData.message || 'Terjadi kesalahan pada server.');
               });
-          })
-          .then(data => {
+            })
+            .then(data => {
               alert(data.message || 'Rak berhasil dihapus!');
               const rowToRemove = document.getElementById(`rack-row-${rackIdToDelete}`);
               if (rowToRemove) {
-                  rowToRemove.remove();
+                rowToRemove.remove();
               }
               rackIdToDelete = null;
-          })
-          .catch(error => {
+            })
+            .catch(error => {
               console.error('Error:', error);
               alert('Terjadi kesalahan saat menghapus rak: ' + error.message);
-          });
-        }
-      });
+            });
+          }
+        });
+      }
     });
   </script>
+  <!-- ====== END SCRIPT ====== -->
 {% endblock content %}

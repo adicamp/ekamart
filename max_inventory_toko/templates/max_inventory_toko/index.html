@@ -1,0 +1,286 @@
+{% extends "_base.html" %}
+{% block title %}Master Max Toko{% endblock title %}
+{% block content %}
+
+<!-- ====== SECTION WRAPPER ====== -->
+<section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 w-full h-full">
+  <div class="mx-auto max-w-screen-xl px-4 lg:px-12 h-full">
+    <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg" style="overflow:visible;">
+
+      <!-- ====== TABLE TITLE ====== -->
+      <div class="px-4 pt-4 pb-3 border-b border-gray-100 dark:border-gray-700">
+        <div class="flex items-center gap-3">
+          <span class="h-8 w-1.5 rounded-full bg-blue-600"></span>
+          <div>
+            <p class="text-[11px] font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400">Master</p>
+            <h2 class="mt-0.5 text-xl sm:text-2xl font-bold leading-tight text-gray-900 dark:text-white">
+              MASTER MAX TOKO
+            </h2>
+          </div>
+        </div>
+      </div>
+      <!-- ====== END TABLE TITLE ====== -->
+
+      <!-- ====== TOKO DATA ====== -->
+      <div class="mt-4 mb-6 p-6 rounded-xl shadow-lg bg-gradient-to-r from-blue-50 via-white to-blue-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 border border-blue-100 dark:border-gray-700">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div class="flex flex-wrap items-center gap-4">
+        <!-- Kode Toko -->
+        <div class="flex flex-col">
+          <span class="text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">Kode Toko</span>
+          <span class="text-lg font-bold text-blue-800 dark:text-blue-300">{{ toko.kode_toko }}</span>
+        </div>
+        <div class="hidden w-px h-8 mx-2 bg-gray-300 dark:bg-gray-700 sm:block"></div>
+        <!-- Nama Toko -->
+        <div class="flex flex-col">
+          <span class="text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">Nama Toko</span>
+          <span class="text-lg font-bold text-blue-800 dark:text-blue-300">{{ toko.nama_toko }}</span>
+        </div>
+        <div class="hidden w-px h-8 mx-2 bg-gray-300 dark:bg-gray-700 sm:block"></div>
+        <!-- Jenis -->
+        <div class="flex flex-col">
+          <span class="text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">Jenis</span>
+          <span class="text-lg font-bold text-blue-800 dark:text-blue-300">{{ toko.jenis_toko }}</span>
+        </div>
+        <div class="hidden w-px h-8 mx-2 bg-gray-300 dark:bg-gray-700 sm:block"></div>
+        <!-- Type -->
+        <div class="flex flex-col">
+          <span class="text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">Type</span>
+          <span class="text-lg font-bold text-blue-800 dark:text-blue-300">{{ toko.type_toko }}</span>
+        </div>
+        <div class="hidden w-px h-8 mx-2 bg-gray-300 dark:bg-gray-700 sm:block"></div>
+        <!-- Alamat Toko -->
+        <div class="flex flex-col">
+          <span class="text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">Alamat Toko</span>
+          <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ toko.alamat_toko }}</span>
+        </div>
+          </div>
+          <!-- Pilih Toko Dropdown  -->
+          {% include 'max_inventory_toko/components/_select_toko_dropdown.html' %}
+        </div>
+      </div>
+      <!-- ====== END TOKO DATA ====== -->
+
+      <!-- ====== TABLE ACTIONS ====== -->
+      <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 p-4">
+        <!-- Search -->
+        <div class="w-full md:w-1/3">
+          <form class="flex items-center">
+            <label for="simple-search" class="sr-only">Search</label>
+            <div class="relative w-full">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required>
+            </div>
+          </form>
+        </div>
+        <!-- Filter By + Dropdown -->
+        {% include 'max_inventory_toko/components/_form_filter_by.html' %}
+        <!-- End Filter By + Dropdown -->
+      </div>
+      <!-- ====== END TABLE ACTIONS ====== -->
+
+      <!-- ====== SUPPLIER TABLE ====== -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" class="px-4 py-3">PLU</th>
+              <th scope="col" class="px-4 py-3">Description</th>
+              <th scope="col" class="px-2 py-3 text-center">Tag</th>
+              <th scope="col" class="px-2 py-3 text-center">Class</th>
+              <th scope="col" class="px-2 py-3 text-center">Last Cost</th>
+              <th scope="col" class="px-2 py-3 text-center">Avg Cost</th>
+              <th scope="col" class="px-2 py-3 text-center">Sales Qty (3 Mo)</th>
+              <th scope="col" class="px-2 py-3 text-center">Sales Qty (2 Mo)</th>
+              <th scope="col" class="px-2 py-3 text-center">Sales Qty (1 Mo)</th>
+              <th scope="col" class="px-2 py-3 text-center">Min Dis</th>
+              <th scope="col" class="px-2 py-3 text-center bg-blue-50 text-blue-700 dark:bg-blue-700 dark:text-blue-200">Qty</th>
+              <th scope="col" class="px-2 py-3 text-center">Rp Max Awal</th>
+              <th scope="col" class="px-2 py-3 text-center">Tgl Rubah</th>
+              <th scope="col" class="px-4 py-3">
+                <span class="sr-only">Actions</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for barang in barang_list %}
+            <tr class="border-b dark:border-gray-700">
+              <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ barang.plu }}</td>
+              <td class="px-4 py-3">{{ barang.description }}</td>
+              <td class="px-2 py-3 text-center">
+                <span class="inline-block text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm w-16 text-center
+                  {% if barang.tag == 'normal' %}
+                    bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300
+                  {% elif barang.tag == 'medium' %}
+                    bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300
+                  {% elif barang.tag == 'fast' %}
+                    bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300
+                  {% else %}
+                    bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300
+                  {% endif %}
+                ">
+                  {{ barang.tag|title }}
+                </span>
+              </td>
+              <td class="px-2 py-3 text-center">
+                <span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-blue-400 border border-blue-400">
+                  {{ barang.class|default:"N/A" }}
+                </span>
+              </td>
+              <td class="px-2 py-3 text-center">{{ barang.last_cost|floatformat:2 }}</td>
+              <td class="px-2 py-3 text-center">{{ barang.avg_cost|floatformat:2 }}</td>
+              <td class="px-2 py-3 text-center">{{ barang.sales_qty_3_mo }}</td>
+              <td class="px-2 py-3 text-center">{{ barang.sales_qty_2_mo }}</td>
+              <td class="px-2 py-3 text-center">{{ barang.sales_qty_1_mo }}</td>
+              <td class="px-2 py-3 text-center">{{ barang.min_dis }}</td>
+              <td class="px-2 py-3 text-center font-semibold bg-blue-50 text-blue-900 dark:bg-blue-900 dark:text-blue-200">
+                {{ barang.qty }}
+              </td>
+              <td class="px-2 py-3 text-center">{{ barang.rp_max_awal|floatformat:2 }}</td>
+              <td class="px-2 py-3 text-center">{{ barang.tgl_rubah }}</td>
+              <td class="px-4 py-3 flex items-center justify-end" id="barang-row-{{ barang.plu }}">
+                <button id="barang-{{ barang.plu }}-dropdown-button" data-dropdown-toggle="barang-{{ barang.plu }}-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
+                  <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                  </svg>
+                </button>
+                <div id="barang-{{ barang.plu }}-dropdown" class="hidden z-50 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                  <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="barang-{{ barang.plu }}-dropdown-button">
+                    <li>
+                      <a href="#"
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white edit-barang-btn"
+                        data-modal-target="editMaxInventoryTokoModal"
+                        data-modal-toggle="editMaxInventoryTokoModal"
+                        data-barang-plu="{{ barang.plu }}"
+                        data-barang-description="{{ barang.description }}"
+                        data-barang-qty="{{ barang.qty }}">
+                        Edit
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="py-1">
+                    <a href="#"
+                      class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white delete-data-trigger"
+                      data-modal-target="deleteModal"
+                      data-modal-toggle="deleteModal"
+                      data-barang-plu="{{ barang.plu }}"
+                      data-barang-description="{{ barang.description }}">
+                      Delete
+                    </a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <!-- ====== END SUPPLIER TABLE ====== -->
+
+      <!-- ====== TABLE PAGINATION ====== -->
+      {% include 'components/table_pagination.html' %}
+      <!-- ====== END TABLE PAGINATION ====== -->
+
+    </div>
+  </div>
+</section>
+<!-- ====== END SECTION WRAPPER ====== -->
+
+<!-- ====== MODALS ====== -->
+{% include 'max_inventory_toko/components/_edit_max_inventory_toko_modal.html' %}
+{% include 'max_inventory_toko/components/_delete_max_inventory_toko_modal.html' %}
+<!-- ====== END MODALS ====== -->
+
+<!-- ====== SCRIPT ====== -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get cookie helper
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+
+    // Edit Modal Logic
+    const editBarangButtons = document.querySelectorAll('.edit-barang-btn');
+    editBarangButtons.forEach(button => {
+      button.addEventListener('click', function(event) {
+        event.preventDefault();
+        const plu = this.dataset.barangPlu;
+        const description = this.dataset.barangDescription;
+        const qty = this.dataset.barangQty;
+        // Find modal fields and set their values
+        const modal = document.getElementById('editMaxInventoryDCModal');
+        if (modal) {
+          const pluField = modal.querySelector('input[name="plu"]');
+          const descriptionField = modal.querySelector('input[name="description"]');
+          const qtyField = modal.querySelector('input[name="qty"]');
+          if (pluField) pluField.value = plu;
+          if (descriptionField) descriptionField.value = description;
+          if (qtyField) qtyField.value = qty;
+        }
+      });
+    });
+
+    // Delete Modal Logic
+    const deleteDataTriggers = document.querySelectorAll('.delete-data-trigger');
+    const deleteConfirmationText = document.querySelector('#deleteModal p.mb-4');
+    const confirmDeleteButton = document.getElementById('confirmDeleteBtn');
+    deleteDataTriggers.forEach(trigger => {
+      trigger.addEventListener('click', function(event) {
+        event.preventDefault();
+        const plu = this.dataset.barangPlu;
+        const description = this.dataset.barangDescription;
+        if (deleteConfirmationText) {
+          deleteConfirmationText.textContent = `Apakah Anda yakin ingin menghapus "${description}" (PLU: ${plu})?`;
+        }
+      });
+    });
+
+    if (confirmDeleteButton) {
+      confirmDeleteButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        const plu = document.querySelector('.delete-data-trigger').dataset.barangPlu;
+        const csrftoken = getCookie('csrftoken');
+        fetch(`/max_inventory_toko/delete/${plu}/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+          },
+          body: JSON.stringify({ plu: plu })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            // Remove the row from the table
+            const row = document.getElementById(`barang-row-${plu}`);
+            if (row) row.remove();
+            // Close the modal
+            const deleteModal = document.getElementById('deleteModal');
+            if (deleteModal) deleteModal.classList.add('hidden');
+          } else {
+            alert('Error deleting data.');
+          }
+        })
+        .catch(error => console.error('Error:', error));
+      });
+    }
+  });
+</script>
+<!-- ====== END SCRIPT ====== -->
+
+{% endblock content %}

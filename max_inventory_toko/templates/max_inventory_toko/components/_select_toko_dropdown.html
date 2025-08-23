@@ -1,0 +1,129 @@
+<!-- ====== TRIGGER BUTTON: PILIH TOKO ====== -->
+<button
+  id="selectTokoDropdownButton"
+  data-dropdown-toggle="selectTokoDropdown"
+  type="button"
+  class="group inline-flex items-center justify-center gap-2 w-full sm:w-auto px-4 sm:px-5 py-2.5 sm:py-2 rounded-lg border border-transparent bg-blue-700 text-white text-sm font-medium tracking-wide shadow-sm hover:bg-blue-800 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus-visible:ring-blue-800 transition-colors duration-150"
+  aria-haspopup="listbox"
+  aria-expanded="false"
+>
+  <span class="whitespace-nowrap">Pilih Toko</span>
+  <!-- Icon: Chevron -->
+  <svg
+    class="w-4 h-4 sm:w-3.5 sm:h-3.5 text-white/90 group-hover:text-white transition-transform duration-200"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 10 6"
+  >
+    <path
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M1 1l4 4 4-4"
+    />
+  </svg>
+</button>
+
+<!-- ====== DROPDOWN WRAPPER CONTAINER ====== -->
+<div
+  id="selectTokoDropdown"
+  class="z-10 hidden bg-white dark:bg-gray-700 rounded-lg shadow-sm w-72 max-w-full overflow-hidden border border-gray-200 dark:border-gray-600"
+  role="dialog"
+  aria-label="Daftar Toko"
+>
+  <!-- ====== SEARCH FIELD / FILTER TOKO ====== -->
+  <div class="p-3 border-b border-gray-200 dark:border-gray-600">
+    <label for="input-group-search-toko" class="sr-only">Cari Toko</label>
+    <div class="relative">
+      <!-- Search Icon -->
+      <div class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3">
+        <svg
+          class="w-4 h-4 text-gray-500 dark:text-gray-400"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 20 20"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+          />
+        </svg>
+      </div>
+      <input
+        type="text"
+        id="input-group-search-toko"
+        placeholder="Cari toko"
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 ps-10 pe-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+        autocomplete="off"
+      >
+    </div>
+  </div>
+
+  <!-- ====== TOKO LIST (RADIO) ====== -->
+  <ul
+    class="max-h-52 overflow-y-auto px-3 py-2 space-y-1 text-sm text-gray-700 dark:text-gray-200"
+    aria-labelledby="selectTokoDropdownButton"
+    role="listbox"
+  >
+    {% for toko in toko_list %}
+      <li role="option" aria-selected="{% if toko.kode_toko == toko.kode_toko %}true{% else %}false{% endif %}">
+        <div class="flex items-center gap-2 p-2 rounded-md cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+          <input
+            id="toko-{{ toko.kode_toko }}"
+            name="selected_toko"
+            type="radio"
+            value="{{ toko.kode_toko }}"
+            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+            {% if toko.kode_toko == toko.kode_toko %}checked{% endif %}
+          >
+          <label for="toko-{{ toko.kode_toko }}" class="flex-1 text-sm font-medium text-gray-900 dark:text-gray-300">
+            {{ toko.kode_toko }} - {{ toko.nama_toko }}
+          </label>
+        </div>
+      </li>
+    {% empty %}
+      <li class="py-4 px-2" role="none">
+        <div class="flex items-center justify-center text-center">
+          <span class="text-xs text-gray-500 dark:text-gray-400">Tidak ada toko tersedia.</span>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <!-- ====== CONFIRM SELECT BUTTON ====== -->
+  <button
+    id="confirmSelectToko"
+    class="flex items-center justify-center w-full px-4 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-blue-700 dark:hover:bg-blue-800 transition-colors"
+    type="button"
+  >
+    Pilih
+  </button>
+</div>
+
+<!-- ====== OPTIONAL: CLIENT-SIDE FILTER (aktifkan untuk pencarian langsung) ====== -->
+<script>
+  (function() {
+    const searchInput = document.getElementById('input-group-search-toko');
+    if (!searchInput) return;
+    const list = searchInput.closest('#selectTokoDropdown')?.querySelector('ul');
+    if (!list) return;
+
+    searchInput.addEventListener('input', function() {
+      const term = this.value.trim().toLowerCase();
+      list.querySelectorAll('li').forEach(li => {
+        const label = li.textContent?.toLowerCase() || '';
+        if (!term) {
+          li.classList.remove('hidden');
+        } else {
+          label.includes(term) ? li.classList.remove('hidden') : li.classList.add('hidden');
+        }
+      });
+    });
+  })();
+</script>

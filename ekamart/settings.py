@@ -39,12 +39,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'compressor',
+    'dashboard',
     'master_user',
     'master_rak',
     'master_shelving',
     'jwk_toko',
     'supplier_reguler',
     'supplier_bkl',
+    'max_inventory_dc',
+    'max_inventory_toko',
+    'store_registration',
+    'product_per_supplier',
 ]
 
 MIDDLEWARE = [

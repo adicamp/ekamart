@@ -1,0 +1,283 @@
+{% extends "_base.html" %}
+{% block title %}Product Per Supplier{% endblock title %}
+{% block content %}
+<section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 w-full h-full">
+  <div class="mx-auto max-w-screen-xl px-4 lg:px-12 h-full">
+    <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg" style="overflow:visible;">
+
+      <!-- ====== TABLE TITLE ====== -->
+      <div class="px-4 pt-4 pb-3 border-b border-gray-100 dark:border-gray-700">
+        <div class="flex items-center gap-3">
+          <span class="h-8 w-1.5 rounded-full bg-blue-600"></span>
+          <div>
+            <p class="text-[11px] font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400">Master</p>
+            <h2 class="mt-0.5 text-xl sm:text-2xl font-bold leading-tight text-gray-900 dark:text-white">
+              MASTER PRODUCT PER SUPPLIER
+            </h2>
+          </div>
+        </div>
+      </div>
+      <!-- ====== END TABLE TITLE ====== -->
+
+      <!-- ====== SUPPLIER DATA ====== -->
+      <div class="mt-4 mb-6 p-6 rounded-xl shadow-lg bg-gradient-to-r from-blue-50 via-white to-blue-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 border border-blue-100 dark:border-gray-700">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div class="flex flex-wrap items-center gap-4">
+            <!-- Kode Supplier -->
+            <div class="flex flex-col">
+              <span class="text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">Kode Supplier</span>
+              <span class="text-lg font-bold text-blue-800 dark:text-blue-300">{{ supplier.kode_supplier }}</span>
+            </div>
+            <div class="hidden w-px h-8 mx-2 bg-gray-300 dark:bg-gray-700 sm:block"></div>
+            <!-- Nama Supplier -->
+            <div class="flex flex-col">
+              <span class="text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">Nama Supplier</span>
+              <span class="text-lg font-bold text-blue-800 dark:text-blue-300">{{ supplier.nama_supplier }}</span>
+            </div>
+            <div class="hidden w-px h-8 mx-2 bg-gray-300 dark:bg-gray-700 sm:block"></div>
+            <!-- Status -->
+            <div class="flex flex-col">
+              <span class="text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400 mb-2">Status</span>
+              {% if supplier.status %}
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-semibold rounded-full bg-green-100 text-green-700 dark:bg-green-700/30 dark:text-green-300">
+                <span class="w-2 h-2 rounded-full bg-green-500"></span> Aktif
+              </span>
+              {% else %}
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-semibold rounded-full bg-red-100 text-red-700 dark:bg-red-700/30 dark:text-red-300">
+                <span class="w-2 h-2 rounded-full bg-red-500"></span> Tidak Aktif
+              </span>
+              {% endif %}
+            </div>
+          </div>
+          <!-- Supplier Selector -->
+          {% include 'product_per_supplier/components/_select_supplier_dropdown.html' %}
+        </div>
+      </div>
+      <!-- ====== END SUPPLIER DATA ====== -->
+
+      <!-- ====== TABLE ACTIONS ====== -->
+      <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+        <div class="w-full md:w-1/2">
+          <form class="flex items-center">
+            <label for="simple-search" class="sr-only">Search</label>
+            <div class="relative w-full">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd"
+                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                        clip-rule="evenodd" />
+                </svg>
+              </div>
+              <input type="text"
+                     id="simple-search"
+                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                     placeholder="Search"
+                     required="">
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- ====== END TABLE ACTIONS ====== -->
+
+      <!-- ====== STORE TABLE ====== -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" class="px-4 py-3">PLU</th>
+              <th scope="col" class="px-4 py-3">Barcode</th>
+              <th scope="col" class="px-4 py-3">Description</th>
+              <th scope="col" class="px-4 py-3 text-center">Status</th>
+              <th scope="col" class="px-4 py-3 text-center">
+                <span class="sr-only">Actions</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for product in products %}
+            <tr class="border-b dark:border-gray-700" id="product-row-{{ product.plu }}">
+              <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ product.plu }}</td>
+              <td class="px-4 py-3">{{ product.barcode }}</td>
+              <td class="px-4 py-3">{{ product.description }}</td>
+              <td class="px-4 py-3 text-center">
+                {% if product.aktif %}
+                <span class="inline-flex items-center justify-center gap-1 px-2 py-0.5 text-xs font-semibold rounded-full w-24 bg-green-100 text-green-700 dark:bg-green-700/30 dark:text-green-300">
+                  <span class="w-2 h-2 rounded-full bg-green-500"></span> Aktif
+                </span>
+                {% else %}
+                <span class="inline-flex items-center justify-center gap-1 px-2 py-0.5 text-xs font-semibold rounded-full w-24 bg-red-100 text-red-700 dark:bg-red-700/30 dark:text-red-300">
+                  <span class="w-2 h-2 rounded-full bg-red-500"></span> Tidak Aktif
+                </span>
+                {% endif %}
+              </td>
+              <td class="px-4 py-3 flex items-center justify-center">
+                <button id="product-{{ product.plu }}-dropdown-button"
+                        data-dropdown-toggle="product-{{ product.plu }}-dropdown"
+                        class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
+                        type="button">
+                  <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                  </svg>
+                </button>
+                <div id="product-{{ product.plu }}-dropdown"
+                     class="hidden z-50 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                  <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                      aria-labelledby="product-{{ product.plu }}-dropdown-button">
+                    <li>
+                      <a href="#"
+                         class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white edit-product-btn"
+                         data-modal-target="editProductPerSupplierModal"
+                         data-modal-toggle="editProductPerSupplierModal"
+                         data-plu="{{ product.plu }}"
+                         data-barcode="{{ product.barcode }}"
+                         data-description="{{ product.description }}"
+                         data-aktif="{{ product.aktif }}">
+                        Edit
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="py-1">
+                    <a href="#"
+                       class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white delete-product-trigger"
+                       data-modal-target="deleteModal"
+                       data-modal-toggle="deleteModal"
+                       data-plu="{{ product.plu }}"
+                       data-description="{{ product.description }}">
+                      Delete
+                    </a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="5" class="px-4 py-6 text-center text-gray-500 dark:text-gray-400">Tidak ada produk.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <!-- ====== END STORE TABLE ====== -->
+
+      <!-- ====== TABLE PAGINATION ====== -->
+      {% include 'components/table_pagination.html' %}
+      <!-- ====== END TABLE PAGINATION ====== -->
+    </div>
+  </div>
+</section>
+
+<!-- ====== MODALS ====== -->
+{% include 'product_per_supplier/components/_edit_product_per_supplier_modal.html' %}
+{% include 'product_per_supplier/components/_delete_product_per_supplier_modal.html' %}
+<!-- ====== END MODALS ====== -->
+
+<!-- ====== SCRIPT ====== -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // CSRF COOKIE FUNCTION
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+
+    // EDIT PRODUCT MODAL LOGIC
+    const editProductButtons = document.querySelectorAll('.edit-product-btn');
+    const editProductForm = document.getElementById('editProductPerSupplierForm');
+
+    const editPluInput = document.getElementById('edit_plu');
+    const editBarcodeInput = document.getElementById('edit_barcode');
+    const editDescriptionInput = document.getElementById('edit_description');
+    const editStatusInput = document.getElementById('edit_status');
+    const originalPluInput = document.getElementById('original_plu');
+
+    editProductButtons.forEach(button => {
+      button.addEventListener('click', function(event) {
+        event.preventDefault();
+        const plu = this.dataset.plu;
+        const barcode = this.dataset.barcode;
+        const description = this.dataset.description;
+        const aktif = this.dataset.aktif;
+
+        if (editPluInput) editPluInput.value = plu;
+        if (editBarcodeInput) editBarcodeInput.value = barcode;
+        if (editDescriptionInput) editDescriptionInput.value = description;
+
+        if (editStatusInput) {
+          const isActive = (aktif === 'True' || aktif === 'true' || aktif === '1');
+          if (editStatusInput.type === 'checkbox') {
+            editStatusInput.checked = isActive;
+          } else {
+            editStatusInput.value = isActive ? '1' : '0';
+          }
+        }
+
+        if (originalPluInput) originalPluInput.value = plu;
+      });
+    });
+
+    if (editProductForm) {
+      editProductForm.addEventListener('submit', function() {
+        const currentPlu = editPluInput ? editPluInput.value : '';
+        this.action = `/products-per-supplier/edit/${currentPlu}/`;
+      });
+    }
+
+    // Delete Modal Logic (updated: kode toko -> plu, nama toko -> description)
+    const deleteProductTriggers = document.querySelectorAll('.delete-product-trigger');
+    const deleteConfirmationText = document.querySelector('#deleteModal p.mb-4');
+    const confirmDeleteButton = document.getElementById('confirmDeleteBtn');
+    let selectedPlu = '';
+       let selectedDescription = '';
+
+    deleteProductTriggers.forEach(trigger => {
+      trigger.addEventListener('click', function(event) {
+        event.preventDefault();
+        selectedPlu = this.dataset.plu;
+        selectedDescription = this.dataset.description;
+        if (deleteConfirmationText) {
+          deleteConfirmationText.textContent = `Apakah Anda yakin ingin menghapus "${selectedDescription}" (PLU: ${selectedPlu})?`;
+        }
+      });
+    });
+
+    if (confirmDeleteButton) {
+      confirmDeleteButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        const csrftoken = getCookie('csrftoken');
+        fetch(`/stores/delete/${selectedPlu}/`, { // Adjust URL if needed
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+          },
+          body: JSON.stringify({ plu: selectedPlu })
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              const row = document.getElementById(`product-row-${selectedPlu}`);
+              if (row) row.remove();
+              const deleteModal = document.getElementById('deleteModal');
+              if (deleteModal) deleteModal.classList.add('hidden');
+            } else {
+              alert('Error deleting product.');
+            }
+          })
+          .catch(error => console.error('Error:', error));
+      });
+    }
+  });
+</script>
+<!-- ====== END SCRIPT ====== -->
+{% endblock content %}

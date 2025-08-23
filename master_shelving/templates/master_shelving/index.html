@@ -1,12 +1,24 @@
 {% extends "_base.html" %}
 {% block title %}Master Shelving{% endblock title %}
 {% block content %}
+  <!-- ====== SECTION WRAPPER ====== -->
   <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 w-full h-full">
     <div class="mx-auto max-w-screen-xl px-4 lg:px-12 h-full">
       <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg" style="overflow:visible;">
-        <div class="px-4 pt-4">
-          <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Master Shelving</h2>
+        <!-- ====== TABLE TITLE ====== -->
+        <div class="px-4 pt-4 pb-3 border-b border-gray-100 dark:border-gray-700">
+          <div class="flex items-center gap-3">
+            <span class="h-8 w-1.5 rounded-full bg-blue-600"></span>
+            <div>
+              <p class="text-[11px] font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400">Planogram</p>
+              <h2 class="mt-0.5 text-xl sm:text-2xl font-bold leading-tight text-gray-900 dark:text-white">
+                MASTER SHELVING
+              </h2>
+            </div>
+          </div>
         </div>
+        <!-- ====== END TABLE TITLE ====== -->
+        <!-- ====== TABLE ACTIONS ====== -->
         <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
           <div class="w-full md:w-1/2">
             <form class="flex items-center">
@@ -30,6 +42,7 @@
             </button>
           </div>
         </div>
+        <!-- ====== SHELVING TABLE ====== -->
         <div class="overflow-x-auto">
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -45,101 +58,65 @@
             </thead>
             <tbody>
               {% for shelving_item in shelving_data %}
-                <tr class="border-b dark:border-gray-700" id="shelving-row-{{ shelving_item.id }}">
-                  <td class="px-4 py-3">{{ shelving_item.rak }}</td>
-                  <td class="px-4 py-3">{{ shelving_item.shelving }}</td>
-                  <td class="px-4 py-3">{{ shelving_item.lubang }}</td>
-                  <td class="px-4 py-3">{{ shelving_item.tgl_update }}</td>
-                  <td class="px-4 py-3 flex items-center justify-end">
-                    <button id="shelving-{{ shelving_item.id }}-dropdown-button" data-dropdown-toggle="shelving-{{ shelving_item.id }}-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
-                      <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                      </svg>
-                    </button>
-                    <div id="shelving-{{ shelving_item.id }}-dropdown" class="hidden z-50 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                      <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="shelving-{{ shelving_item.id }}-dropdown-button">
-                        <li>
-                          <a href="#"
-                             class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white edit-shelving-btn"
-                             data-modal-target="editShelvingModal"
-                             data-modal-toggle="editShelvingModal"
-                             data-shelving-id="{{ shelving_item.id }}"
-                             data-shelving-rak="{{ shelving_item.rak }}"
-                             data-shelving-shelving="{{ shelving_item.shelving }}"
-                             data-shelving-lubang="{{ shelving_item.lubang }}"
-                             data-shelving-tgl_update="{{ shelving_item.tgl_update }}">
-                             Edit
-                          </a>
-                        </li>
-                      </ul>
-                      <div class="py-1">
+              <tr class="border-b dark:border-gray-700" id="shelving-row-{{ shelving_item.id }}">
+                <td class="px-4 py-3">{{ shelving_item.rak }}</td>
+                <td class="px-4 py-3">{{ shelving_item.shelving }}</td>
+                <td class="px-4 py-3">{{ shelving_item.lubang }}</td>
+                <td class="px-4 py-3">{{ shelving_item.tgl_update }}</td>
+                <td class="px-4 py-3 flex items-center justify-end">
+                  <button id="shelving-{{ shelving_item.id }}-dropdown-button" data-dropdown-toggle="shelving-{{ shelving_item.id }}-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
+                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                    </svg>
+                  </button>
+                  <div id="shelving-{{ shelving_item.id }}-dropdown" class="hidden z-50 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="shelving-{{ shelving_item.id }}-dropdown-button">
+                      <li>
                         <a href="#"
-                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white delete-shelving-trigger"
-                           data-modal-target="deleteModal"
-                           data-modal-toggle="deleteModal"
-                           data-shelving-id="{{ shelving_item.id }}"
-                           data-shelving-rak-name="{{ shelving_item.shelving }}">
-                           Delete
+                          class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white edit-shelving-btn"
+                          data-modal-target="editShelvingModal"
+                          data-modal-toggle="editShelvingModal"
+                          data-shelving-id="{{ shelving_item.id }}"
+                          data-shelving-rak="{{ shelving_item.rak }}"
+                          data-shelving-shelving="{{ shelving_item.shelving }}"
+                          data-shelving-lubang="{{ shelving_item.lubang }}"
+                          data-shelving-tgl_update="{{ shelving_item.tgl_update }}">
+                          Edit
                         </a>
-                      </div>
+                      </li>
+                    </ul>
+                    <div class="py-1">
+                      <a href="#"
+                        class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white delete-shelving-trigger"
+                        data-modal-target="deleteModal"
+                        data-modal-toggle="deleteModal"
+                        data-shelving-id="{{ shelving_item.id }}"
+                        data-shelving-rak-name="{{ shelving_item.shelving }}">
+                        Delete
+                      </a>
                     </div>
-                  </td>
-                </tr>
+                  </div>
+                </td>
+              </tr>
               {% endfor %}
             </tbody>
           </table>
         </div>
-        <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
-          <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-            Showing
-            <span class="font-semibold text-gray-900 dark:text-white">1-10</span>
-            of
-            <span class="font-semibold text-gray-900 dark:text-white">1000</span>
-          </span>
-          <ul class="inline-flex items-stretch -space-x-px">
-            <li>
-              <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                <span class="sr-only">Previous</span>
-                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-            </li>
-            <li>
-              <a href="#" aria-current="page" class="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight text-primary-600 bg-primary-50 border border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                <span class="sr-only">Next</span>
-                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                </svg>
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <!-- ====== END SHELVING TABLE ====== -->
+        <!-- ====== TABLE PAGINATION ====== -->
+        {% include 'components/table_pagination.html' %}
+        <!-- ====== END TABLE PAGINATION ====== -->
       </div>
     </div>
   </section>
+  <!-- ====== MODALS ====== -->
   {% include 'master_shelving/components/_add_shelving_modal.html' %}
   {% include 'master_shelving/components/_edit_shelving_modal.html' %}
   {% include 'master_shelving/components/_delete_shelving_modal.html' %}
-
+  <!-- ====== END MODALS ====== -->
+  <!-- ====== SCRIPT ====== -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Helper function for CSRF token
       function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -156,15 +133,15 @@
       }
 
       // Edit Shelving Modal Logic
-      const editButtons = document.querySelectorAll('.edit-shelving-btn');
+      const editShelvingButtons = document.querySelectorAll('.edit-shelving-btn');
       const editShelvingForm = document.getElementById('editShelvingForm');
       const editShelvingIdHidden = document.getElementById('edit_shelving_id_hidden');
       const editRakSelect = document.getElementById('edit_rak_select');
       const editShelvingInput = document.getElementById('edit_shelving_input');
-      const editLubangInput = document.getElementById('edit_lubang_input')
-      const editTglUpdateInput = document.getElementById('edit_tgl_update_input')
+      const editLubangInput = document.getElementById('edit_lubang_input');
+      const editTglUpdateInput = document.getElementById('edit_tgl_update_input');
 
-      editButtons.forEach(button => {
+      editShelvingButtons.forEach(button => {
         button.addEventListener('click', function(event) {
           event.preventDefault();
 
@@ -188,14 +165,14 @@
       });
 
       // Delete Shelving Modal Logic
-      const deleteTriggers = document.querySelectorAll('.delete-shelving-trigger');
+      const deleteShelvingTriggers = document.querySelectorAll('.delete-shelving-trigger');
       const deleteConfirmationText = document.querySelector('#deleteModal p.mb-4');
       const confirmDeleteButton = document.getElementById('confirmDeleteBtn');
 
       let shelvingIdToDelete = null;
       let shelvingRakNameToDelete = null;
 
-      deleteTriggers.forEach(button => {
+      deleteShelvingTriggers.forEach(button => {
         button.addEventListener('click', function(event) {
           event.preventDefault();
 
@@ -203,7 +180,7 @@
           shelvingRakNameToDelete = this.dataset.shelvingRakName;
 
           if (deleteConfirmationText) {
-            deleteConfirmationText.textContent = `Apakah Anda yakin ingin menghapus shelving "${shelvingRakNameToDelete}" (ID: ${shelvingIdToDelete})?`;
+            deleteConfirmationText.textContent = `Apakah Anda yakin ingin menghapus shelving \"${shelvingRakNameToDelete}\" (ID: ${shelvingIdToDelete})?`;
           }
         });
       });
@@ -249,4 +226,5 @@
       }
     });
   </script>
+  <!-- ====== END SCRIPT ====== -->
 {% endblock content %}

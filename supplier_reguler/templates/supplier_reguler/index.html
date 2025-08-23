@@ -1,40 +1,58 @@
 {% extends "_base.html" %}
 {% block title %}Supplier Reguler{% endblock title %}
 {% block content %}
+  <!-- ====== SECTION WRAPPER ====== -->
   <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 w-full h-full">
     <div class="mx-auto max-w-screen-xl px-4 lg:px-12 h-full">
       <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg" style="overflow:visible;">
-        <!-- Table Title -->
-        <div class="px-4 pt-4">
-          <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Master Supplier Reguler</h2>
-          <!-- DC Data -->
-            <div class="mt-4 mb-6 p-6 bg-gradient-to-r from-blue-50 via-white to-blue-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 rounded-xl shadow-lg border border-blue-100 dark:border-gray-700">
-              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div class="flex items-center gap-4">
-                  <div class="flex flex-col">
-                    <span class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wide">Kode DC</span>
-                    <span class="text-lg font-bold text-blue-800 dark:text-blue-300">{{ dc.kode_dc }}</span>
-                  </div>
-                  <div class="w-px h-8 bg-gray-300 dark:bg-gray-700 mx-2 hidden sm:block"></div>
-                  <div class="flex flex-col">
-                    <span class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wide">Nama DC</span>
-                    <span class="text-lg font-bold text-blue-800 dark:text-blue-300">{{ dc.nama_dc }}</span>
-                  </div>
-                </div>
-                <div class="flex flex-col sm:items-end">
-                  <span class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wide">Alamat DC</span>
-                  <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ dc.alamat_dc }}</span>
-                </div>
+        
+        <!-- ====== TABLE TITLE ====== -->
+        <div class="px-4 pt-4 pb-3 border-b border-gray-100 dark:border-gray-700">
+          <div class="flex items-center gap-3">
+            <span class="h-8 w-1.5 rounded-full bg-blue-600"></span>
+            <div>
+              <p class="text-[11px] font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400">Master</p>
+              <h2 class="mt-0.5 text-xl sm:text-2xl font-bold leading-tight text-gray-900 dark:text-white">
+                MASTER SUPPLIER REGULER
+              </h2>
+            </div>
+          </div>
+        </div>
+        <!-- ====== END TABLE TITLE ====== -->
+
+        <!-- ====== DC DATA ====== -->
+  <div class="mt-4 mb-6 p-6 bg-gradient-to-r from-blue-50 via-white to-blue-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 rounded-xl shadow-lg border border-blue-100 dark:border-gray-700">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div class="flex items-center gap-4">
+              <!-- Kode DC -->
+              <div class="flex flex-col">
+                <span class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wide">Kode DC</span>
+                <span class="text-lg font-bold text-blue-800 dark:text-blue-300">{{ dc.kode_dc }}</span>
+              </div>
+              <div class="w-px h-8 bg-gray-300 dark:bg-gray-700 mx-2 hidden sm:block"></div>
+              <!-- Nama DC -->
+              <div class="flex flex-col">
+                <span class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wide">Nama DC</span>
+                <span class="text-lg font-bold text-blue-800 dark:text-blue-300">{{ dc.nama_dc }}</span>
               </div>
             </div>
+            <!-- Alamat DC -->
+            <div class="flex flex-col sm:items-end">
+              <span class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wide">Alamat DC</span>
+              <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ dc.alamat_dc }}</span>
+            </div>
+          </div>
         </div>
+        <!-- ====== END DC DATA ====== -->
+        
+        <!-- ====== TABLE ACTIONS ====== -->
         <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
           <div class="w-full md:w-1/2">
             <form class="flex items-center">
               <label for="simple-search" class="sr-only">Search</label>
               <div class="relative w-full">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"></svg>
                     <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                   </svg>
                 </div>
@@ -51,21 +69,24 @@
             </button>
           </div>
         </div>
+        <!-- ====== END TABLE ACTIONS ====== -->
+
+        <!-- ====== SUPPLIER TABLE ====== -->
         <div class="overflow-x-auto">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
-              <th scope="col" class="px-4 py-3">Supplier</th>
-              <th scope="col" class="px-2 py-3 text-center">Senin</th>
-              <th scope="col" class="px-2 py-3 text-center">Selasa</th>
-              <th scope="col" class="px-2 py-3 text-center">Rabu</th>
-              <th scope="col" class="px-2 py-3 text-center">Kamis</th>
-              <th scope="col" class="px-2 py-3 text-center">Jumat</th>
-              <th scope="col" class="px-2 py-3 text-center">Sabtu</th>
-              <th scope="col" class="px-2 py-3 text-center">Minggu</th>
-              <th scope="col" class="px-4 py-3">
-                <span class="sr-only">Actions</span>
-              </th>
+                <th scope="col" class="px-4 py-3">Supplier</th>
+                <th scope="col" class="px-2 py-3 text-center">Senin</th>
+                <th scope="col" class="px-2 py-3 text-center">Selasa</th>
+                <th scope="col" class="px-2 py-3 text-center">Rabu</th>
+                <th scope="col" class="px-2 py-3 text-center">Kamis</th>
+                <th scope="col" class="px-2 py-3 text-center">Jumat</th>
+                <th scope="col" class="px-2 py-3 text-center">Sabtu</th>
+                <th scope="col" class="px-2 py-3 text-center">Minggu</th>
+                <th scope="col" class="px-4 py-3">
+                  <span class="sr-only">Actions</span>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -73,147 +94,117 @@
               <tr class="border-b dark:border-gray-700">
                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ supplier.nama_supplier }}</td>
                 <td class="px-2 py-3 text-center">
-                {% if supplier.jadwal.senin %}
-                  <span class="inline-block w-4 h-4 bg-green-500 rounded-full"></span>
-                {% else %}
-                  <span class="inline-block w-4 h-4 bg-red-400 rounded-full"></span>
-                {% endif %}
+                  {% if supplier.jadwal.senin %}
+                    <span class="inline-block w-4 h-4 bg-green-500 rounded-full"></span>
+                  {% else %}
+                    <span class="inline-block w-4 h-4 bg-red-400 rounded-full"></span>
+                  {% endif %}
                 </td>
                 <td class="px-2 py-3 text-center">
-                {% if supplier.jadwal.selasa %}
-                  <span class="inline-block w-4 h-4 bg-green-500 rounded-full"></span>
-                {% else %}
-                  <span class="inline-block w-4 h-4 bg-red-400 rounded-full"></span>
-                {% endif %}
+                  {% if supplier.jadwal.selasa %}
+                    <span class="inline-block w-4 h-4 bg-green-500 rounded-full"></span>
+                  {% else %}
+                    <span class="inline-block w-4 h-4 bg-red-400 rounded-full"></span>
+                  {% endif %}
                 </td>
                 <td class="px-2 py-3 text-center">
-                {% if supplier.jadwal.rabu %}
-                  <span class="inline-block w-4 h-4 bg-green-500 rounded-full"></span>
-                {% else %}
-                  <span class="inline-block w-4 h-4 bg-red-400 rounded-full"></span>
-                {% endif %}
+                  {% if supplier.jadwal.rabu %}
+                    <span class="inline-block w-4 h-4 bg-green-500 rounded-full"></span>
+                  {% else %}
+                    <span class="inline-block w-4 h-4 bg-red-400 rounded-full"></span>
+                  {% endif %}
                 </td>
                 <td class="px-2 py-3 text-center">
-                {% if supplier.jadwal.kamis %}
-                  <span class="inline-block w-4 h-4 bg-green-500 rounded-full"></span>
-                {% else %}
-                  <span class="inline-block w-4 h-4 bg-red-400 rounded-full"></span>
-                {% endif %}
+                  {% if supplier.jadwal.kamis %}
+                    <span class="inline-block w-4 h-4 bg-green-500 rounded-full"></span>
+                  {% else %}
+                    <span class="inline-block w-4 h-4 bg-red-400 rounded-full"></span>
+                  {% endif %}
                 </td>
                 <td class="px-2 py-3 text-center">
-                {% if supplier.jadwal.jumat %}
-                  <span class="inline-block w-4 h-4 bg-green-500 rounded-full"></span>
-                {% else %}
-                  <span class="inline-block w-4 h-4 bg-red-400 rounded-full"></span>
-                {% endif %}
+                  {% if supplier.jadwal.jumat %}
+                    <span class="inline-block w-4 h-4 bg-green-500 rounded-full"></span>
+                  {% else %}
+                    <span class="inline-block w-4 h-4 bg-red-400 rounded-full"></span>
+                  {% endif %}
                 </td>
                 <td class="px-2 py-3 text-center">
-                {% if supplier.jadwal.sabtu %}
-                  <span class="inline-block w-4 h-4 bg-green-500 rounded-full"></span>
-                {% else %}
-                  <span class="inline-block w-4 h-4 bg-red-400 rounded-full"></span>
-                {% endif %}
+                  {% if supplier.jadwal.sabtu %}
+                    <span class="inline-block w-4 h-4 bg-green-500 rounded-full"></span>
+                  {% else %}
+                    <span class="inline-block w-4 h-4 bg-red-400 rounded-full"></span>
+                  {% endif %}
                 </td>
                 <td class="px-2 py-3 text-center">
-                {% if supplier.jadwal.minggu %}
-                  <span class="inline-block w-4 h-4 bg-green-500 rounded-full"></span>
-                {% else %}
-                  <span class="inline-block w-4 h-4 bg-red-400 rounded-full"></span>
-                {% endif %}
+                  {% if supplier.jadwal.minggu %}
+                    <span class="inline-block w-4 h-4 bg-green-500 rounded-full"></span>
+                  {% else %}
+                    <span class="inline-block w-4 h-4 bg-red-400 rounded-full"></span>
+                  {% endif %}
                 </td>
                 <td class="px-4 py-3 flex items-center justify-end" id="rack-row-{{ supplier.id }}">
-                <button id="rack-{{ supplier.id }}-dropdown-button" data-dropdown-toggle="rack-{{ supplier.id }}-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
-                  <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                  </svg>
-                </button>
-                <div id="rack-{{ supplier.id }}-dropdown" class="hidden z-50 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                  <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="rack-{{ supplier.id }}-dropdown-button">
-                  <li>
-                    <a href="#"
-                     class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white edit-supplier-btn"
-                     data-modal-target="editSupplierModal"
-                     data-modal-toggle="editSupplierModal"
-                     data-rack-id="{{ supplier.id }}"
-                     data-rack-name="{{ supplier.nama_supplier }}"
-                     data-rack-last-updated="{{ supplier.last_updated|default:'' }}"
-                     data-rack-user-id="{{ supplier.user_id|default:'' }}"
-                     data-jadwal-senin="{{ supplier.jadwal.senin|yesno:'1,0' }}"
-                     data-jadwal-selasa="{{ supplier.jadwal.selasa|yesno:'1,0' }}"
-                     data-jadwal-rabu="{{ supplier.jadwal.rabu|yesno:'1,0' }}"
-                     data-jadwal-kamis="{{ supplier.jadwal.kamis|yesno:'1,0' }}"
-                     data-jadwal-jumat="{{ supplier.jadwal.jumat|yesno:'1,0' }}"
-                     data-jadwal-sabtu="{{ supplier.jadwal.sabtu|yesno:'1,0' }}"
-                     data-jadwal-minggu="{{ supplier.jadwal.minggu|yesno:'1,0' }}">
-                     Edit
-                    </a>
-                  </li>
-                  </ul>
-                  <div class="py-1">
-                  <a href="#"
-                     class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white delete-rack-trigger"
-                     data-modal-target="deleteModal"
-                     data-modal-toggle="deleteModal"
-                     data-rack-id="{{ supplier.id }}"
-                     data-rack-name="{{ supplier.nama_supplier }}">
-                     Delete
-                  </a>
+                  <button id="rack-{{ supplier.id }}-dropdown-button" data-dropdown-toggle="rack-{{ supplier.id }}-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
+                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                    </svg>
+                  </button>
+                  <div id="rack-{{ supplier.id }}-dropdown" class="hidden z-50 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="rack-{{ supplier.id }}-dropdown-button">
+                      <li>
+                        <a href="#"
+                          class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white edit-supplier-btn"
+                          data-modal-target="editSupplierModal"
+                          data-modal-toggle="editSupplierModal"
+                          data-rack-id="{{ supplier.id }}"
+                          data-rack-name="{{ supplier.nama_supplier }}"
+                          data-rack-last-updated="{{ supplier.last_updated|default:'' }}"
+                          data-rack-user-id="{{ supplier.user_id|default:'' }}"
+                          data-jadwal-senin="{{ supplier.jadwal.senin|yesno:'1,0' }}"
+                          data-jadwal-selasa="{{ supplier.jadwal.selasa|yesno:'1,0' }}"
+                          data-jadwal-rabu="{{ supplier.jadwal.rabu|yesno:'1,0' }}"
+                          data-jadwal-kamis="{{ supplier.jadwal.kamis|yesno:'1,0' }}"
+                          data-jadwal-jumat="{{ supplier.jadwal.jumat|yesno:'1,0' }}"
+                          data-jadwal-sabtu="{{ supplier.jadwal.sabtu|yesno:'1,0' }}"
+                          data-jadwal-minggu="{{ supplier.jadwal.minggu|yesno:'1,0' }}">
+                          Edit
+                        </a>
+                      </li>
+                    </ul>
+                    <div class="py-1">
+                      <a href="#"
+                        class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white delete-rack-trigger"
+                        data-modal-target="deleteModal"
+                        data-modal-toggle="deleteModal"
+                        data-rack-id="{{ supplier.id }}"
+                        data-rack-name="{{ supplier.nama_supplier }}">
+                        Delete
+                      </a>
+                    </div>
                   </div>
-                </div>
                 </td>
               </tr>
               {% endfor %}
             </tbody>
-            </table>
+          </table>
         </div>
-        <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
-          <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-            Showing
-            <span class="font-semibold text-gray-900 dark:text-white">1-10</span>
-            of
-            <span class="font-semibold text-gray-900 dark:text-white">1000</span>
-          </span>
-          <ul class="inline-flex items-stretch -space-x-px">
-            <li>
-              <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                <span class="sr-only">Previous</span>
-                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-            </li>
-            <li>
-              <a href="#" aria-current="page" class="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight text-primary-600 bg-primary-50 border border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                <span class="sr-only">Next</span>
-                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                </svg>
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <!-- ====== END SUPPLIER TABLE ====== -->
+
+        <!-- ====== TABLE PAGINATION ====== -->
+        {% include 'components/table_pagination.html' %}
+        <!-- ====== END TABLE PAGINATION ====== -->
+
       </div>
     </div>
   </section>
+  <!-- ====== END SECTION WRAPPER ====== -->
+
+  <!-- ====== MODALS ====== -->
   {% include 'supplier_reguler/components/_add_supplier_modal.html' %}
   {% include 'supplier_reguler/components/_edit_supplier_modal.html' %}
   {% include 'supplier_reguler/components/_delete_supplier_modal.html' %}
+  <!-- ====== END MODALS ====== -->
 
+  <!-- ====== SCRIPT ====== -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       function getCookie(name) {
@@ -340,4 +331,5 @@
       }
     });
   </script>
+  <!-- ====== END SCRIPT ====== -->
 {% endblock content %}

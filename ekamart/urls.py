@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    path('', include('dashboard.urls')),
     path('admin/', admin.site.urls),
     path('master-user/', include('master_user.urls')),
     path('master-rak/', include('master_rak.urls')),
@@ -25,4 +26,8 @@ urlpatterns = [
     path('jwk-toko/', include('jwk_toko.urls')),
     path('supplier-reguler/', include('supplier_reguler.urls')),
     path('supplier-bkl/', include('supplier_bkl.urls')),
+    path('max-inventory-dc/', include('max_inventory_dc.urls')),
+    path('max-inventory-toko/', include('max_inventory_toko.urls')),
+    path('store-registration/', include('store_registration.urls')),
+    path('product-per-supplier/', include('product_per_supplier.urls')),
 ]
