@@ -1,0 +1,23 @@
+/* Sidebar Component Styles (extracted from inline template)
+   Keep styles focused and scoped with #drawer-navigation */
+#drawer-navigation { box-shadow: 2px 0 8px rgba(0,0,0,0.05); }
+.sidebar-item-active { background: linear-gradient(90deg, rgba(59,130,246,0.15), rgba(59,130,246,0.05)); position: relative; }
+.sidebar-item-active::before { content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:#2563eb; border-top-right-radius:4px; border-bottom-right-radius:4px; }
+.dark .sidebar-item-active { background: linear-gradient(90deg, rgba(37,99,235,0.25), rgba(59,130,246,0.08)); }
+.menu-toggle[aria-expanded="true"] svg.chevron { transform: rotate(180deg); }
+.menu-toggle svg.chevron { transition: transform .25s ease; }
+.menu-collapsible { overflow: hidden; transition: height .28s ease; }
+.skeleton-block { height:34px; border-radius:6px; background:linear-gradient(90deg,#e5e7eb 0%,#f3f4f6 40%,#e5e7eb 80%); background-size:200% 100%; animation: skel 1.2s linear infinite; }
+.dark .skeleton-block { background:linear-gradient(90deg,#374151 0%,#4b5563 40%,#374151 80%); }
+@keyframes skel { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+.custom-scroll::-webkit-scrollbar { width: 8px; }
+.custom-scroll::-webkit-scrollbar-track { background: transparent; }
+.custom-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 4px; }
+.dark .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.16); }
+.root-group-btn { position:relative; }
+.root-group-btn .chevron { transition: transform .25s ease; }
+.root-group-btn[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+.root-accent { width:6px; height:24px; border-radius:4px; transform-origin:left center; transition:transform .3s cubic-bezier(.4,0,.2,1), background-color .3s; }
+.accent-blue, .accent-amber, .accent-slate { background:linear-gradient(180deg,#2563eb,#3b82f6); }
+.dark .root-group-btn { border-color: #475569; }
+.root-group-btn:hover .root-accent { transform:scaleX(1.1); }

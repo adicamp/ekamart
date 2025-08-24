@@ -16,10 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from ekamart.views import menu_api_view
 
 urlpatterns = [
     path('', include('dashboard.urls')),
     path('admin/', admin.site.urls),
+    path('api/menu/', menu_api_view, name='api.menu'),
     path('master-user/', include('master_user.urls')),
     path('master-rak/', include('master_rak.urls')),
     path('master-shelving/', include('master_shelving.urls')),
